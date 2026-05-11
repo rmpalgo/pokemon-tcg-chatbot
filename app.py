@@ -20,13 +20,16 @@ nltk.download("punkt_tab", quiet=True)
 nltk.download("wordnet", quiet=True)
 nltk.download("stopwords", quiet=True)
 
+
 @st.cache_data
 def load_knowledge_base():
     with open("knowledge_base.json", "r") as f:
         return json.load(f)
 
+
 lemmatizer = WordNetLemmatizer()
 stop_words = set(stopwords.words("english"))
+
 
 def preprocess(text):
     text = text.lower()
@@ -34,6 +37,7 @@ def preprocess(text):
     tokens = nltk.word_tokenize(text)
     tokens = [lemmatizer.lemmatize(t) for t in tokens if t not in stop_words]
     return " ".join(tokens)
+
 
 @st.cache_resource
 def build_model():
@@ -49,7 +53,9 @@ def build_model():
     tfidf_matrix = vectorizer.fit_transform(corpus)
     return vectorizer, tfidf_matrix, tags, kb
 
+
 CONFIDENCE_THRESHOLD = 0.15
+
 
 def get_response(user_input, vectorizer, tfidf_matrix, tags, kb):
     processed = preprocess(user_input)
@@ -198,6 +204,7 @@ def main():
             st.markdown(response)
 
         st.rerun()
+
 
 if __name__ == "__main__":
     main()

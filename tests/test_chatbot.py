@@ -62,7 +62,7 @@ class TestKnowledgeBase:
 
     def test_all_entries_have_required_keys(self, knowledge_base):
         for entry in knowledge_base:
-            assert "tag" in entry, f"Missing 'tag' key"
+            assert "tag" in entry, "Missing 'tag' key"
             assert "patterns" in entry, f"Missing 'patterns' in {entry.get('tag')}"
             assert "responses" in entry, f"Missing 'responses' in {entry.get('tag')}"
 
