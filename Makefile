@@ -13,21 +13,24 @@ lint:
 
 # Run tests with pytest
 test:
-	python -m pytest tests/ -v --tb=short
+	python3 -m pytest tests/ -v --tb=short
 
 # Validate the knowledge base JSON structure
 validate:
-	python -c "\
-	import json, sys; \
-	kb = json.load(open('knowledge_base.json')); \
-	assert isinstance(kb, list), 'KB must be a list'; \
-	for e in kb: \
-	    assert 'tag' in e, f'Missing tag'; \
-	    assert 'patterns' in e, f'Missing patterns in {e[\"tag\"]}'; \
-	    assert 'responses' in e, f'Missing responses in {e[\"tag\"]}'; \
-	    assert isinstance(e['responses'], list) and len(e['responses']) > 0, f'Empty responses in {e[\"tag\"]}'; \
-	print(f'OK: {len(kb)} intents, {sum(len(e[\"patterns\"]) for e in kb)} patterns'); \
-	"
+	python3 -c "$$VALIDATE_SCRIPT"
+
+define VALIDATE_SCRIPT
+import json
+kb = json.load(open('knowledge_base.json'))
+assert isinstance(kb, list), 'KB must be a list'
+for e in kb:
+    assert 'tag' in e, 'Missing tag'
+    assert 'patterns' in e, f'Missing patterns in {e["tag"]}'
+    assert 'responses' in e, f'Missing responses in {e["tag"]}'
+    assert isinstance(e['responses'], list) and len(e['responses']) > 0, f'Empty responses in {e["tag"]}'
+print(f'OK: {len(kb)} intents, {sum(len(e["patterns"]) for e in kb)} patterns')
+endef
+export VALIDATE_SCRIPT
 
 # Run the Streamlit app locally
 run:
