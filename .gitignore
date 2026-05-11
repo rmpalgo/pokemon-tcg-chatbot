@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test / lint caches
+.pytest_cache/
+pytest-cache-files-*/
+.mypy_cache/
+htmlcov/
+.coverage
+
+# Streamlit
+.streamlit/secrets.toml
+
+# NLTK data (downloaded at runtime)
+nltk_data/
+

@@ -33,14 +33,6 @@ make all
 
 This app deploys to **Streamlit Community Cloud** connected to this repo.
 
-### First-time setup:
-1. Push this repo to your GitHub account
-2. Go to [share.streamlit.io](https://share.streamlit.io)
-3. Click **New app** → select this repo → set main file to `app.py`
-4. Deploy — Streamlit watches `main` and redeploys on every push
-
-No secrets or API keys are required. The app is fully self-contained.
-
 ### CI/CD:
 - GitHub Actions runs lint + tests across Python 3.10, 3.11, and 3.12 on every push and PR
 - Streamlit Cloud auto-redeploys when `main` is updated
