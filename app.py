@@ -173,7 +173,7 @@ def main():
 
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+            st.markdown(message["content"].replace("$", "\\$"))
 
     last_msg = st.session_state.messages[-1]
     if last_msg["role"] == "assistant" and last_msg.get("tag"):
@@ -201,7 +201,7 @@ def main():
             "tag": matched_tag,
         })
         with st.chat_message("assistant"):
-            st.markdown(response)
+            st.markdown(response.replace("$", "\\$"))
 
         st.rerun()
 
